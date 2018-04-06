@@ -1,0 +1,14 @@
+#!/bin/bash
+
+tmpdir_="$(mktemp -d)"
+file_="$(basename ${1})"
+file_path_="$(readlink -f $1)"
+destfile_="${tmpdir_}/${file_}"
+
+[ -f "$file_path_" ] || { printf "You must pass a file (no directory)\n" ; exit 1 ; }
+
+ln "$file_path_" "${destfile_}"
+ipfs add -r "${tmpdir_}"
+
+# vim:set et sw=2 ts=2 tw=120:
+

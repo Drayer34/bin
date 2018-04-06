@@ -1,0 +1,18 @@
+#!/bin/bash
+
+DEST_DIR="$HOME/Pictures/wallpaper/current/"
+MY_FILE=$(readlink -f $1)
+
+case $1 in
+  (*.*) ext=".${1##*.}";;
+  (*)   ext="";;
+esac
+
+
+mkdir -p $DEST_DIR 
+rm -rf "$DEST_DIR"/*
+
+ln "$MY_FILE" "$DEST_DIR/wallpaper_save$ext"
+ln -s "$DEST_DIR/wallpaper_save$ext" "$DEST_DIR/wallpaper" 
+
+~/.fehbg 
